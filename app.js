@@ -7,8 +7,6 @@ var logger = require('morgan');
 //  inisiasi router
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var AdminRouter = require('./routes/cth')
-var TesRouter = require('./routes/tes')
 
 var app = express();
 
@@ -24,8 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // deklarasi path 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/admin', AdminRouter);
-app.use('/Coba', TesRouter);
+
 
 
 // catch 404 and forward to error handler
