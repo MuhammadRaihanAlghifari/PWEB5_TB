@@ -8,7 +8,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.get('/login1', controller.form);
-router.post('/dashboard', controller.checklogin);
+router.post('/showProfile', controller.checklogin);
 
 router.get("/dashboard", function (req, res, next) {
   res.render("layouts/dashboard", { title: "Login" });
