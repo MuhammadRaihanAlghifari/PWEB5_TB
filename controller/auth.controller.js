@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
 
+
 const form = (req, res) => {
   const token = req.cookies.token;
 
@@ -25,24 +26,28 @@ const checklogin = async (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
     }
 
+    
     // Buat token JWT
     const token = jwt.sign(
-      { email: foundUser.email, 
-        name: foundUser.name, 
-        departemen: foundUser.departemen,
+      { email: foundUser.email,
+        nama: foundUser.nama,
+        departement: foundUser.departement,
         role: foundUser.role },
       process.env.JWT_SECRET_TOKEN,
       { expiresIn: 86400 }
     );
-
     // Set cookie dengan token
     res.cookie("token", token, { httpOnly: true });
 
+
+
     // Redirect ke halaman sesuai dengan peran pengguna
     if (foundUser.role === "mahasiswa") {
-      return res.redirect("/home");
+      // return res.redirect("/layouts/editprofile");
+      return res.status(200).json({message: 'mahasiswa berhasil login'})
     } else if (foundUser.role === "admin") {
-      return res.redirect("/admin/dashboard");
+      // return res.redirect("/layouts/editprofile");
+      return res.status(200).json({message: 'admin berhasil login'})
     }
     console.log(foundUser.role)
     // Jika tidak ada peran yang cocok, berikan respons standar
@@ -57,7 +62,6 @@ const checklogin = async (req, res) => {
 function logout(req, res) {
   res.clearCookie("token");
   res.redirect("/login1");
- 
 }
 
 const changePassword = async (req, res) => {
@@ -66,7 +70,7 @@ const changePassword = async (req, res) => {
 
     // Cari pengguna berdasarkan userId
     const user = await User.findByPk(req.userId);
-    console.log(user)
+    console.log(user);
     if (!user) {
       return res.status(404).json({ message: "Pengguna tidak ditemukan" });
     }
@@ -83,7 +87,7 @@ const changePassword = async (req, res) => {
     // Perbarui password pengguna di database
     await user.update({ password: hashedNewPassword });
 
-    return res.redirect('/login1');
+    return res.redirect("/login1");
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Terjadi kesalahan server" });
@@ -94,5 +98,5 @@ module.exports = {
   form,
   checklogin,
   logout,
-  changePassword
+  changePassword,
 };
