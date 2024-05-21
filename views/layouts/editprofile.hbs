@@ -1,0 +1,95 @@
+<section class="bg-[#27374D] flex items-center justify-center rounded-3xl max-w-3xl mx-auto">
+    <div class="container p-8 text-white ">
+        <h2 class="text-2xl font-bold mb-4">Edit Profil Saya</h2>
+        <form id="profileForm" class="space-y-4">
+            <div class="form-group ">
+                <label for="kodeAnggota" class="block font-medium text-white">Kode Anggota 
+                    <span class="text-red-500">*</span> 
+                    <span class="text-sm text-gray-500">Tidak dapat diubah</span>
+                </label>
+                <input type="text" id="kodeAnggota" name="kodeAnggota" value="AB-1640" disabled class="mt-1 block w-full border border-gray-200 rounded-md shadow-sm p-2 bg-[#9DB2BF] text-black">
+            </div>
+            <div class="form-group">
+                <label for="nim" class="block font-medium ">NIM 
+                    <span class="text-red-500">*</span> 
+                    <span class="text-sm text-gray-500">Wajib diisi</span>
+                </label>
+                <input type="text" id="nim" name="nim" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-black">
+            </div>
+            <div class="form-group">
+                <label for="namaLengkap" class="block font-medium ">Nama Lengkap 
+                    <span class="text-red-500">*</span> 
+                    <span class="text-sm text-gray-500">Wajib diisi</span>
+                </label>
+                <input type="text" id="namaLengkap" name="namaLengkap" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-black">
+            </div>
+            <div class="form-group">
+                <label for="jurusan" class="block font-medium ">Jurusan 
+                    <span class="text-red-500">*</span> 
+                    <span class="text-sm text-gray-500">Wajib diisi</span>
+                </label>
+                <input type="text" id="jurusan" name="jurusan" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-black">
+            </div>
+            <div class="form-group">
+                <label for="noHp" class="block font-medium"> No Hp 
+                    <span class="text-red-500">*</span> 
+                    <span class="text-sm text-gray-500">Wajib diisi</span>
+                </label>
+                <input type="text" id="noHp" name="noHp" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-black">
+            </div>
+            <div class="form-group">
+                <label for="alamatLengkap" class="block font-medium ">Alamat Lengkap 
+                    <span class="text-red-500">*</span> 
+                    <span class="text-sm text-gray-500">Wajib diisi</span>
+                </label>
+                <textarea id="alamatLengkap" name="alamatLengkap" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-black">
+                </textarea>
+            </div>
+            <button type="submit" class="btn text-white bg-[#9DB2BF] py-2 px-4 border-none rounded hover:scale-105 duration-200">Update</button>
+        </form>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const profileForm = document.getElementById('profileForm');
+
+    const profileData = 
+    {
+        kodeAnggota: "",
+        nim: "",
+        namaLengkap: "",
+        jurusan: "",
+        noHp: "",
+        alamatLengkap: ""
+    };
+
+    document.getElementById('nim').value = profileData.nim;
+    document.getElementById('namaLengkap').value = profileData.namaLengkap;
+    document.getElementById('jurusan').value = profileData.jurusan;
+    document.getElementById('noHp').value = profileData.noHp;
+    document.getElementById('alamatLengkap').value = profileData.alamatLengkap;
+
+    // menghandle pengiriman form
+    profileForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        //update nilai
+        const updatedProfile = 
+        {
+            kodeAnggota: document.getElementById('kodeAnggota').value,
+            nim: document.getElementById('nim').value,
+            namaLengkap: document.getElementById('namaLengkap').value,
+            jurusan: document.getElementById('jurusan').value,
+            noHp: document.getElementById('noHp').value,
+            alamatLengkap: document.getElementById('alamatLengkap').value,
+        };
+
+        console.log('Updated Profile:', updatedProfile);
+
+        // menampilkan pesan konfirmasi
+        alert('Profil telah diperbarui!');
+        });
+    });
+    
+</script>
