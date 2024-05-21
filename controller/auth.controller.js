@@ -36,6 +36,13 @@ const checklogin = async (req, res) => {
       process.env.JWT_SECRET_TOKEN,
       { expiresIn: 86400 }
     );
+
+    const data = {
+      email: foundUser.email,
+        nama: foundUser.nama,
+        departement: foundUser.departement,
+        role: foundUser.role}
+      
     // Set cookie dengan token
     res.cookie("token", token, { httpOnly: true });
 
@@ -43,7 +50,7 @@ const checklogin = async (req, res) => {
 
     // Redirect ke halaman sesuai dengan peran pengguna
     if (foundUser.role === "mahasiswa") {
-      return res.render("layouts/dashboard", { title: "Login" })
+      return res.render("layouts/dashboard", { data })
     } else if (foundUser.role === "admin") {
       // return res.redirect("/layouts/editprofile");
       return res.status(200).json({message: 'admin berhasil login'})
@@ -57,6 +64,8 @@ const checklogin = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
 
 function logout(req, res) {
   res.clearCookie("token");

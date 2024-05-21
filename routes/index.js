@@ -18,6 +18,11 @@ router.get("/editprofile", function (req, res, next) {
   res.render("layouts/editprofile", { title: "Login" });
 });
 
+router.get("/showProfile", function (req, res, next) {
+  res.render("layouts/showProfile", { title: "Login" });
+});
+
+
 router.get("/password", function (req, res, next) {
   res.render("layouts/password", { title: "Login" });
 });
