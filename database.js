@@ -1,14 +1,8 @@
-const mysql = require('mysql')
-const connection = mysql.createConnection({
-host: 'localhost',
-user: 'root',
-password: 'null',
-database: 'sibaca'
-})
+const { Sequelize } = require("sequelize");
 
-connection.connect()
-connection.query('SELECT 1+1 AS solution', (err, rows, fields) => { 
-    if (err) throw err
-    console.log('The solution is:', rows[0].solution)
-})
-connection.end()
+const sequelize = new Sequelize("sibaca", "root", "", {
+  host: "localhost",
+  dialect: "mysql",
+});
+
+module.exports = sequelize;
