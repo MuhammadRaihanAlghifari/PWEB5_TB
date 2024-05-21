@@ -50,10 +50,10 @@ const checklogin = async (req, res) => {
 
     // Redirect ke halaman sesuai dengan peran pengguna
     if (foundUser.role === "mahasiswa") {
-      return res.render("layouts/dashboard", { data })
+      return res.render("layouts/showProfile", { data })
     } else if (foundUser.role === "admin") {
-      // return res.redirect("/layouts/editprofile");
-      return res.status(200).json({message: 'admin berhasil login'})
+      // return res.redirect("/layouts/showProfile");
+      return res.render("layouts/showProfile", { data })
     }
     console.log(foundUser.role)
     // Jika tidak ada peran yang cocok, berikan respons standar
