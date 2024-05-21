@@ -7,8 +7,8 @@ router.get("/", function (req, res, next) {
   res.render("layouts/login1", { title: "Login" });
 });
 
-
-router.post('/login', controller.checklogin);
+router.get('/login1', controller.form);
+router.post('/login1', controller.checklogin);
 
 
 router.get("/password", function (req, res, next) {
