@@ -8,8 +8,15 @@ router.get("/", function (req, res, next) {
 });
 
 router.get('/login1', controller.form);
-router.post('/login1', controller.checklogin);
+router.post('/dashboard', controller.checklogin);
 
+router.get("/dashboard", function (req, res, next) {
+  res.render("layouts/dashboard", { title: "Login" });
+});
+
+router.get("/editprofile", function (req, res, next) {
+  res.render("layouts/editprofile", { title: "Login" });
+});
 
 router.get("/password", function (req, res, next) {
   res.render("layouts/password", { title: "Login" });
