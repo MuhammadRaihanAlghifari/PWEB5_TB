@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
+require("dotenv").config()
+
 
 
 const form = (req, res) => {
@@ -29,7 +31,8 @@ const checklogin = async (req, res) => {
     
     // Buat token JWT
     const token = jwt.sign(
-      { email: foundUser.email,
+      { id: foundUser.id,
+        email: foundUser.email,
         nama: foundUser.nama,
         departement: foundUser.departement,
         role: foundUser.role },
@@ -50,10 +53,11 @@ const checklogin = async (req, res) => {
 
     // Redirect ke halaman sesuai dengan peran pengguna
     if (foundUser.role === "mahasiswa") {
-      return res.render("layouts/showProfile", { data })
+      // return res.render("layouts/showProfile", { data })
+      return res.redirect("/showProfile")
     } else if (foundUser.role === "admin") {
       // return res.redirect("/layouts/showProfile");
-      return res.render("layouts/showProfile", { data })
+      // return res.render("layouts/showProfile", { data })
     }
     console.log(foundUser.role)
     // Jika tidak ada peran yang cocok, berikan respons standar

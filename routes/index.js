@@ -1,6 +1,9 @@
 var express = require("express");
 var router = express.Router();
+const middleware = require("../middleware/verifytoken")
 const controller = require('../controller/auth.controller')
+const profileLihat = require('../controller/lihatProfile')
+
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -18,9 +21,7 @@ router.get("/editprofile", function (req, res, next) {
   res.render("layouts/editprofile", { title: "Login" });
 });
 
-router.get("/showProfile", function (req, res, next) {
-  res.render("layouts/showProfile", { title: "Login" });
-});
+router.get("/showProfile", middleware.verifyToken, profileLihat.lihatProfil);
 
 
 router.get("/password", function (req, res, next) {
