@@ -58,6 +58,7 @@ const checklogin = async (req, res) => {
     } else if (foundUser.role === "admin") {
       // return res.redirect("/layouts/showProfile");
       // return res.render("layouts/showProfile", { data })
+      return res.redirect("/showProfile")
     }
     console.log(foundUser.role)
     // Jika tidak ada peran yang cocok, berikan respons standar
@@ -81,7 +82,7 @@ const changePassword = async (req, res) => {
     const { currentPassword, newPassword } = req.body;
 
     // Cari pengguna berdasarkan userId
-    const user = await User.findByPk(req.userId);
+    const user = await User.findOne(req.userId);
     console.log(user);
     if (!user) {
       return res.status(404).json({ message: "Pengguna tidak ditemukan" });
@@ -98,8 +99,8 @@ const changePassword = async (req, res) => {
 
     // Perbarui password pengguna di database
     await user.update({ password: hashedNewPassword });
-
-    return res.redirect("/login1");
+    return res.redirect("/dashboard");
+    
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Terjadi kesalahan server" });
