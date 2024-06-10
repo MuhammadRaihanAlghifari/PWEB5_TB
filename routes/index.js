@@ -12,10 +12,9 @@ router.get("/", function (req, res, next) {
 
 
 router.get('/login1', controller.form);
-router.post('/showProfile', controller.checklogin);
-router.post('/dashboard', controller.changePassword);
+router.post('/showProfile', controller.checklogin, controller.changePassword);
+router.post('/dashboard',  controller.changePassword);
 router.post('/databuku', controller.changePassword);
-
 
 // router.post('/dashboard', async (req, res) => {
 //   try {
@@ -30,11 +29,17 @@ router.get("/dashboard", function (req, res, next) {
   res.render("layouts/dashboard", { title: "Login" });
 });
 
+router.get("/db1", function (req, res, next) {
+  res.render("Mhs/db1", { title: "Login" });
+});
+
 router.get("/editprofile", function (req, res, next) {
   res.render("layouts/editprofile", { title: "Login" });
 });
 
 router.get("/showProfile", middleware.verifyToken, profileLihat.lihatProfil);
+
+router.get("/logout", controller.logout);
 
 
 router.get("/password", function (req, res, next) {

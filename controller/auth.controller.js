@@ -54,11 +54,11 @@ const checklogin = async (req, res) => {
     // Redirect ke halaman sesuai dengan peran pengguna
     if (foundUser.role === "mahasiswa") {
       // return res.render("layouts/showProfile", { data })
-      return res.redirect("/showProfile")
+      return res.redirect("/dashboard")
     } else if (foundUser.role === "admin") {
       // return res.redirect("/layouts/showProfile");
       // return res.render("layouts/showProfile", { data })
-      return res.redirect("/showProfile")
+      return res.redirect("/dashboard")
     }
     console.log(foundUser.role)
     // Jika tidak ada peran yang cocok, berikan respons standar
@@ -74,7 +74,7 @@ const checklogin = async (req, res) => {
 
 function logout(req, res) {
   res.clearCookie("token");
-  res.redirect("/login1");
+  res.redirect("/");
 }
 
 const changePassword = async (req, res) => {
