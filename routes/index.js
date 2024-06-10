@@ -14,6 +14,7 @@ router.get("/", function (req, res, next) {
 router.get('/login1', controller.form);
 router.post('/showProfile', controller.checklogin, controller.changePassword);
 router.post('/dashboard',  controller.changePassword);
+router.post('/databuku', controller.changePassword);
 
 // router.post('/dashboard', async (req, res) => {
 //   try {
@@ -43,6 +44,10 @@ router.get("/logout", controller.logout);
 
 router.get("/password", function (req, res, next) {
   res.render("layouts/password", { title: "Login" });
+});
+
+router.get("/databuku", function (req, res, next) {
+  res.render("layouts/databuku", { title: "Login" });
 });
 
 module.exports = router;
