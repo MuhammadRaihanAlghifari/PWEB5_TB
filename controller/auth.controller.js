@@ -54,7 +54,7 @@ const checklogin = async (req, res) => {
     // Redirect ke halaman sesuai dengan peran pengguna
     if (foundUser.role === "mahasiswa") {
       // return res.render("layouts/showProfile", { data })
-      return res.redirect("/dashboard")
+      return res.redirect("/dashboardMhs")
     } else if (foundUser.role === "admin") {
       // return res.redirect("/layouts/showProfile");
       // return res.render("layouts/showProfile", { data })
