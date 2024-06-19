@@ -3,6 +3,10 @@ const bcrypt = require("bcrypt");
 const { User } = require("../models");
 require("dotenv").config()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 57044525058e9a27cacb6b39a553a1d97b9e4608
 
 const form = (req, res) => {
   const token = req.cookies.token;
@@ -27,6 +31,7 @@ const checklogin = async (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
     }
 
+    
     // Buat token JWT
     const token = jwt.sign(
       { id: foundUser.id,
@@ -47,14 +52,24 @@ const checklogin = async (req, res) => {
     // Set cookie dengan token
     res.cookie("token", token, { httpOnly: true });
 
+
+
     // Redirect ke halaman sesuai dengan peran pengguna
     if (foundUser.role === "mahasiswa") {
       // return res.render("layouts/showProfile", { data })
+<<<<<<< HEAD
       return res.redirect("/showProfile")
     } else if (foundUser.role === "admin") {
       // return res.redirect("/layouts/showProfile");
       // return res.render("layouts/showProfile", { data })
       return res.redirect("/showProfile")
+=======
+      return res.redirect("/dashboard")
+    } else if (foundUser.role === "admin") {
+      // return res.redirect("/layouts/showProfile");
+      // return res.render("layouts/showProfile", { data })
+      return res.redirect("/dashboard")
+>>>>>>> 57044525058e9a27cacb6b39a553a1d97b9e4608
     }
     console.log(foundUser.role)
     // Jika tidak ada peran yang cocok, berikan respons standar
@@ -66,9 +81,15 @@ const checklogin = async (req, res) => {
   }
 };
 
+
+
 function logout(req, res) {
   res.clearCookie("token");
+<<<<<<< HEAD
   res.redirect("/login1");
+=======
+  res.redirect("/");
+>>>>>>> 57044525058e9a27cacb6b39a553a1d97b9e4608
 }
 
 const changePassword = async (req, res) => {
