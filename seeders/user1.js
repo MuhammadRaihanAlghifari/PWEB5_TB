@@ -9,6 +9,7 @@ module.exports = {
         email: 'agif@student.unand.ac.id',
         nama: 'agif',
         nim: '2211522031',
+        hp: '081298076037',
         password: await bcrypt.hash('agif',10),
         departement:'Sistem Informasi',
         role:'mahasiswa',
