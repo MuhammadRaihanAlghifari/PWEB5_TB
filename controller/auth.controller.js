@@ -60,7 +60,7 @@ const checklogin = async (req, res) => {
     } else if (foundUser.role === "admin") {
       // return res.redirect("/layouts/showProfile");
       // return res.render("layouts/showProfile", { data })
-      return res.redirect("/dashboard")
+      return res.redirect("/DashboardAdmin")
     }
     console.log(foundUser.role)
     // Jika tidak ada peran yang cocok, berikan respons standar
@@ -101,7 +101,7 @@ const changePassword = async (req, res) => {
 
     // Perbarui password pengguna di database
     await user.update({ password: hashedNewPassword });
-    return res.redirect("/dashboard");
+    return res.redirect("/DashboardAdmin");
     
   } catch (error) {
     console.log(error);

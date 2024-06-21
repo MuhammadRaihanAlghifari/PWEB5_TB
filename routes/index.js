@@ -27,7 +27,7 @@ router.get("/logout", controller.logout);
 // });
 
 router.get("/dashboard", function (req, res, next) {
-  res.render("layouts/dashboard", { title: "Login" });
+  res.render("layouts/DashboardAdmin", { title: "Login" });
 });
 
 router.get("/editprofile", function (req, res, next) {
@@ -77,9 +77,6 @@ router.get("/RiwayatPeminjaman", function (req, res, next) {
 });
 
 
-router.get("/DashboardAdmin", function (req, res, next) {
-  res.render("admin/DashBoardAdmin", { title: "Login" });
-});
 
 router.get("/DataBuku", function (req, res, next) {
   res.render("admin/DataBuku", { title: "Login" });
