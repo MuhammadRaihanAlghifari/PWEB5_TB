@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 const { User } = require("../models");
 require("dotenv").config()
 
-
-
 const form = (req, res) => {
   const token = req.cookies.token;
 
