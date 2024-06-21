@@ -17,6 +17,7 @@ router.post('/dashboardMhs',  controller.changePassword);
 router.get("/profileMhs", middleware.verifyToken, profileLihat.lihatProfil);
 router.get("/logout", controller.logout);
 
+
 // router.post('/dashboard', async (req, res) => {
 //   try {
 //     await changePassword(req, res);
@@ -62,6 +63,10 @@ router.get("/LihatBuku", function (req, res, next) {
 
 router.get("/RiwayatPeminjaman", function (req, res, next) {
   res.render("Mhs/RiwayatPeminjaman", { title: "Login" });
+});
+
+router.get("/databuku", function (req, res, next) {
+  res.render("layouts/databuku", { title: "Login" });
 });
 
 module.exports = router;
