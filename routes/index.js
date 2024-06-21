@@ -100,4 +100,12 @@ router.get("/ProfileAdmin", function (req, res, next) {
 router.get("/ListPeminjaman", function (req, res, next) {
   res.render("admin/ListPeminjaman", { title: "Login" });
 });
+
+router.get("/ListPengembalian", function (req, res, next) {
+  res.render("admin/ListPengembalian", { title: "Login" });
+});
+
+router.get("/ListPerpanjangan", function (req, res, next) {
+  res.render("admin/ListPerpanjangan", { title: "Login" });
+});
 module.exports = router;

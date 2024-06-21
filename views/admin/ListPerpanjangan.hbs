@@ -1,0 +1,106 @@
+<!-- Sidebar -->
+<div class="pr-12 bg-slate-200 max-md:pr-5">
+  <div class="flex gap-5 max-md:flex-col max-md:gap-0">
+    <div class="flex flex-col w-1/4 max-md:w-full">
+      <div class="flex flex-col grow items-start py-20 pr-20 pl-6 w-full text-xl font-semibold text-white bg-slate-700 max-md:px-5 max-md:mt-7">
+        <div class="self-center text-4xl font-extrabold">SIBACA</div>
+        <div class="flex gap-5 mt-11 whitespace-nowrap max-md:mt-10">
+          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/b60de2b05833aae014f700c15004065d740f7d013e04abe31fc4ffff3485b48b?" class="shrink-0 aspect-[1.03] w-[30px]" />
+          <div class="flex-auto my-auto"><a href="DashboardAdmin">Dashboard</a></div>
+        </div>
+
+        <div class="flex gap-5 mt-9">
+          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/10ca86c0fa9f5c4743f2eac8520827b728b57241d504744cbd15b00d130920c4?" class="shrink-0 aspect-[0.86] w-[25px]" />
+          <div class="flex-auto my-auto"><a href="ListPeminjaman">Data Peminjaman</a></div>
+        </div>
+
+        <div class="flex gap-5 mt-8">
+          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/7089de8e39479018adcd656b47318a42920e119966f6c5dd3b5cc790b623c66e?" class="shrink-0 aspect-[0.86] w-[25px]" />
+          <div class="flex-auto"><a href="ListPengembalian">Data Pengembalian</a></div>
+        </div>
+
+        <div class="flex gap-5 mt-8">
+          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/e365d1cf19fd1044d2daa4f94170b7f2820a62d9c007c82d8d8a3d92dc531247?" class="shrink-0 aspect-[0.86] w-[25px]" />
+          <div class="flex-auto"><a href="DataBuku">Data Buku</a></div>
+        </div>
+
+        <div class="flex gap-4 mt-7 whitespace-nowrap">
+          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c48306110fc090c44783725041e9a4a01f51f1f38c250b2ad64a43c1789ebd38?" class="shrink-0 aspect-square w-[29px]" />
+          <div class="flex-auto my-auto"><a href="ProfileAdmin">Profile</a></div>
+        </div>
+
+        <div class="flex gap-5 mt-9">
+          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/3a33e1545f0e1600b4a06c1ea80cb88c0790aa555d25c184928c8945a1779dba?" class="shrink-0 aspect-[1.14] w-[33px]" />
+          <div class="flex-auto my-auto"><a href="/logout">Log Out</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Sidebar -->
+
+<!-- Content-->
+<section class="flex items-start justify-end rounded-2xl ml-70 mx-auto pt-10">
+  <div class="container">
+    <main class="flex-1">
+      <h2 class="text-3xl font-bold mb-4">List Perpanjangan Peminjaman</h2>
+      <table class="w-full bg-white shadow-md rounded">
+        <thead class="bg-[#9DB2BF]">
+          <tr>
+            <th class="py-2 px-4">NIM</th>
+            <th class="py-2 px-4">Nama Anggota</th>
+            <th class="py-2 px-4">Id Buku</th>
+            <th class="py-2 px-4">Judul Buku</th>
+            <th class="py-2 px-4">Tambahan Durasi</th>
+            <th class="py-2 px-4">Kode Peminjaman</th>
+            <th class="py-2 px-4">Aksi</th>
+          </tr>
+        </thead>
+
+        <tbody id="loan-list">
+
+        </tbody>
+      </table>
+    </main>
+  </div>
+</section>
+<!-- End Content-->
+
+<!-- Confirmation Modal -->
+<div id="confirmationModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="bg-[#9DB2BF] p-10 rounded shadow-lg text-center">
+    <p class="text-slate-800">Apakah Anda yakin untuk mengonfirmasi perpanjangan peminjaman?</p>
+    <button id="confirmButton" class="bg-slate-700 text-white px-4 py-2 rounded mt-4">Konfirmasi</button>
+    <button id="cancelButton" class="bg-slate-700 text-white px-4 py-2 rounded mt-4">Batal</button>
+  </div>
+</div>
+
+<!-- Rejection Modal -->
+<div id="rejectionModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="bg-[#9DB2BF] p-10 rounded shadow-lg text-center">
+    <p class="text-slate-800">Apakah Anda yakin untuk menolak perpanjangan peminjaman?</p>
+    <button id="rejectButton" class="bg-slate-700 text-white px-4 py-2 rounded mt-4">Tolak</button>
+    <button id="cancelRejectButton" class="bg-slate-700 text-white px-4 py-2 rounded mt-4">Batal</button>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div id="successModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="bg-[#9DB2BF] p-8 rounded shadow-lg text-center">
+    <p id="successMessage"></p>
+    <button id="okButton" class="bg-slate-700 text-white px-4 py-2 rounded mt-4">OK</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => { // data const loans = [ {nim: '2211522031', name: 'Agif', bookId: 'PB0001', title: 'Matematika Diskrit', duration: '3 Hari', code: 'BS001'}, ]; const loanList =
+  document.getElementById('loan-list'); loans.forEach(loan => { const row = document.createElement('tr'); row.innerHTML = ` <td class="py-2 px-4">${loan.nim}</td> <td class="py-2 px-4">${loan.name}</td> <td class="py-2
+  px-4">${loan.bookId}</td> <td class="py-2 px-4">${loan.title}</td> <td class="py-2 px-4">${loan.duration}</td> <td class="py-2 px-4">${loan.code}</td> <td class="py-2 px-4"> <button class="confirmButton bg-[#9DB2BF] text-white px-4 py-2
+  rounded">Konfirmasi</button> <button class="rejectButton bg-[#9DB2BF] text-white px-4 py-2 rounded">Tolak</button> </td> `; loanList.appendChild(row); }); const confirmationModal = document.getElementById('confirmationModal'); const
+  rejectionModal = document.getElementById('rejectionModal'); const successModal = document.getElementById('successModal'); const successMessage = document.getElementById('successMessage'); document.addEventListener('click', (event) => { if
+  (event.target.classList.contains('confirmButton')) { confirmationModal.classList.remove('hidden'); } else if (event.target.classList.contains('rejectButton')) { rejectionModal.classList.remove('hidden'); } else if (event.target.id ===
+  'confirmButton') { confirmationModal.classList.add('hidden'); successMessage.textContent = 'Perpanjangan Peminjaman Berhasil Dikonfirmasi!'; successModal.classList.remove('hidden'); } else if (event.target.id === 'rejectButton') {
+  rejectionModal.classList.add('hidden'); successMessage.textContent = 'Perpanjangan Peminjaman Berhasil Ditolak!'; successModal.classList.remove('hidden'); } else if (event.target.id === 'cancelButton' || event.target.id ===
+  'cancelRejectButton') { confirmationModal.classList.add('hidden'); rejectionModal.classList.add('hidden'); } else if (event.target.id === 'okButton') { successModal.classList.add('hidden'); } } ); }) ;
+
+</script>
