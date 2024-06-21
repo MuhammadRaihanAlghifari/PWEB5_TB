@@ -64,6 +64,18 @@ router.get("/RiwayatPeminjaman", function (req, res, next) {
   res.render("Mhs/RiwayatPeminjaman", { title: "Login" });
 });
 
+router.get("/KembalikanBuku", function (req, res, next) {
+  res.render("Mhs/KembalikanBuku", { title: "Login" });
+});
+
+router.get("/LihatBuku", function (req, res, next) {
+  res.render("Mhs/LihatBuku", { title: "Login" });
+});
+
+router.get("/RiwayatPeminjaman", function (req, res, next) {
+  res.render("Mhs/RiwayatPeminjaman", { title: "Login" });
+});
+
 
 router.get("/DashboardAdmin", function (req, res, next) {
   res.render("admin/DashBoardAdmin", { title: "Login" });
