@@ -12,9 +12,9 @@ router.get("/", function (req, res, next) {
 
 
 router.get('/login1', controller.form);
-router.post('/showProfile', controller.checklogin, controller.changePassword);
+router.post('/profileMhs', controller.checklogin, controller.changePassword);
 router.post('/dashboardMhs',  controller.changePassword);
-router.get("/showProfile", middleware.verifyToken, profileLihat.lihatProfil);
+router.get("/profileMhs", middleware.verifyToken, profileLihat.lihatProfil);
 router.get("/logout", controller.logout);
 
 // router.post('/dashboard', async (req, res) => {

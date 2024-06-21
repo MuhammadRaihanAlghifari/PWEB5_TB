@@ -34,6 +34,8 @@ const checklogin = async (req, res) => {
       { id: foundUser.id,
         email: foundUser.email,
         nama: foundUser.nama,
+        nim: foundUser.nim,
+        hp: foundUser.hp,
         departement: foundUser.departement,
         role: foundUser.role },
       process.env.JWT_SECRET_TOKEN,
@@ -43,6 +45,8 @@ const checklogin = async (req, res) => {
     const data = {
       email: foundUser.email,
         nama: foundUser.nama,
+        nim: foundUser.nim,
+        hp: foundUser.hp,
         departement: foundUser.departement,
         role: foundUser.role}
       
