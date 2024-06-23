@@ -34,7 +34,10 @@ const checklogin = async (req, res) => {
       { id: foundUser.id,
         email: foundUser.email,
         nama: foundUser.nama,
+        id: foundUser.id,
+        hp: foundUser.hp,
         departement: foundUser.departement,
+        alamat: foundUser.alamat,
         role: foundUser.role },
       process.env.JWT_SECRET_TOKEN,
       { expiresIn: 86400 }
@@ -42,8 +45,11 @@ const checklogin = async (req, res) => {
 
     const data = {
       email: foundUser.email,
+        id: foundUser.id,
         nama: foundUser.nama,
+        hp: foundUser.hp,
         departement: foundUser.departement,
+        alamat: foundUser.alamat,
         role: foundUser.role}
       
     // Set cookie dengan token
@@ -54,7 +60,7 @@ const checklogin = async (req, res) => {
     // Redirect ke halaman sesuai dengan peran pengguna
     if (foundUser.role === "mahasiswa") {
       // return res.render("layouts/showProfile", { data })
-      return res.redirect("/dashboard")
+      return res.redirect("/dashboardMhs")
     } else if (foundUser.role === "admin") {
       // return res.redirect("/layouts/showProfile");
       // return res.render("layouts/showProfile", { data })
@@ -99,7 +105,7 @@ const changePassword = async (req, res) => {
 
     // Perbarui password pengguna di database
     await user.update({ password: hashedNewPassword });
-    return res.redirect("/dashboard");
+    return res.redirect("/dashboardMhs");
     
   } catch (error) {
     console.log(error);

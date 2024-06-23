@@ -8,12 +8,14 @@ module.exports = {
      await queryInterface.bulkInsert('Users', [{
         email: 'agif@student.unand.ac.id',
         nama: 'agif',
-        nim: '2211522031',
+        id: '2211522031',
+        hp: '081298076037',
         password: await bcrypt.hash('agif',10),
         departement:'Sistem Informasi',
+        alamat:'Kapalo koto',
         role:'mahasiswa',
-        create_at: new Date(),
-        update_at: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         email: 'admin@gmail.com',
@@ -21,8 +23,8 @@ module.exports = {
         password: await bcrypt.hash('admin',10),
         departement:'administrasi',
         role:'admin',
-        create_at: new Date(),
-        update_at: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
        }
    
    

@@ -23,7 +23,7 @@ const lihatProfil = async(req,res)=>{
       if (!akun) {
         return res.status(400).json({success: false, messsage:"akun not found"})
       }
-      return res.render('layouts/showProfile', { akun })
+      return res.render('Mhs/ProfileMhs', { akun })
     } catch (error) {
       console.error(error);
       return res.status(500).json({success: false,messsage:"asd", error})
