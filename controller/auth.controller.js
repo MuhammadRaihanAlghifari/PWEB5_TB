@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 const { User } = require("../models");
 require("dotenv").config()
 
-
-
 const form = (req, res) => {
   const token = req.cookies.token;
 
@@ -64,7 +62,7 @@ const checklogin = async (req, res) => {
     } else if (foundUser.role === "admin") {
       // return res.redirect("/layouts/showProfile");
       // return res.render("layouts/showProfile", { data })
-      return res.redirect("/dashboard")
+      return res.redirect("/DashboardAdmin")
     }
     console.log(foundUser.role)
     // Jika tidak ada peran yang cocok, berikan respons standar
