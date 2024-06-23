@@ -6,7 +6,7 @@ dotenv.config();
 const verifyToken = (req, res, next) => {
     const token = req.cookies.token || '';
     if (!token) {
-        return res.status(403).json({ message: 'Access denied' });
+        res.redirect('/');
     }
 
     try {
