@@ -30,6 +30,28 @@ const lihatProfil = async(req,res)=>{
     }
   }
   
+  const PinjamNama = async(req,res)=>{
+    try {
+      console.log("asdasdasd");
+      const id = req.user.id
+      console.log(id);
+      const akun = await User.findOne({
+        where:{
+          id: id
+        }
+      })
+      console.log(akun);
+      if (!akun) {
+        return res.status(400).json({success: false, messsage:"akun not found"})
+      }
+      return res.render('Mhs/PinjamBuku', { akun })
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({success: false,messsage:"asd", error})
+    }
+  }
+
   module.exports = {
-    lihatProfil
+    lihatProfil,
+    PinjamNama
   };
