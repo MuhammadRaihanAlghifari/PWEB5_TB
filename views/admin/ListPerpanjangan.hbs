@@ -68,8 +68,9 @@
 <section class="flex items-start justify-end rounded-2xl ml-70 mx-auto pt-10">
     <div class="container">
         <main class="flex-1">
-            <h2 class="text-3xl font-bold mb-4">List Perpanjangan Peminjaman</h2>
-            <table class="w-full bg-white shadow-md rounded">
+            <h2 class="text-3xl font-bold text-slate-700 mt-4">LIST PERPANJANGAN PEMINJAMAN</h2>
+            <button id="generateCSV" class="bg-slate-700 text-white px-6 py-1 rounded mt-4">Cetak</button>
+            <table class="w-full bg-white shadow-md rounded mt-4">
                 <thead class="bg-[#9DB2BF]">
                     <tr>
                         <th class="py-2 px-4">NIM</th>
@@ -119,17 +120,82 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => 
-    {
-        // data
-        const loans = [
-            {nim: '2211522031', name: 'Agif', bookId: 'PB0001', title: 'Matematika Diskrit', duration: '3 Hari', code: 'BS001'},
-            
-            
-        ];
+document.addEventListener('DOMContentLoaded', () => 
+{
+    // Load data from localStorage
+    const loans = JSON.parse(localStorage.getItem('loans')) || [
+        {nim: '2211522031', name: 'Agif', bookId: 'PB0001', title: 'Matematika Diskrit', duration: '6 Hari', code: 'BS001'},
+        
+    ];
 
-        const loanList = document.getElementById('loan-list');
-        loans.forEach(loan => 
+    const confirmedLoans = JSON.parse(localStorage.getItem('confirmedLoans')) || [];
+    const rejectedLoans = JSON.parse(localStorage.getItem('rejectedLoans')) || [];
+
+    const loanList = document.getElementById('loan-list');
+    loans.forEach((loan, index) => 
+    {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="py-2 px-4">${loan.nim}</td>
+            <td class="py-2 px-4">${loan.name}</td>
+            <td class="py-2 px-4">${loan.bookId}</td>
+            <td class="py-2 px-4">${loan.title}</td>
+            <td class="py-2 px-4">${loan.duration}</td>
+            <td class="py-2 px-4">${loan.code}</td>
+            <td class="py-2 px-4">
+                <button class="confirmButton bg-[#9DB2BF] text-white px-4 py-2 rounded" data-index="${index}">Konfirmasi</button>
+                <button class="rejectButton bg-[#9DB2BF] text-white px-4 py-2 rounded" data-index="${index}">Tolak</button>
+            </td>
+        `;
+        loanList.appendChild(row);
+    });
+
+    const confirmationModal = document.getElementById('confirmationModal');
+    const rejectionModal = document.getElementById('rejectionModal');
+    const successModal = document.getElementById('successModal');
+    const successMessage = document.getElementById('successMessage');
+
+    let selectedLoanIndex;
+
+    document.addEventListener('click', (event) => 
+    {
+        if (event.target.classList.contains('confirmButton')) {
+            selectedLoanIndex = event.target.getAttribute('data-index');
+            confirmationModal.classList.remove('hidden');
+        } else if (event.target.classList.contains('rejectButton')) {
+            selectedLoanIndex = event.target.getAttribute('data-index');
+            rejectionModal.classList.remove('hidden');
+        } else if (event.target.id === 'confirmButton') {
+            confirmedLoans.push(loans[selectedLoanIndex]);
+            loans.splice(selectedLoanIndex, 1);
+            updateLoanList();
+            localStorage.setItem('loans', JSON.stringify(loans));
+            localStorage.setItem('confirmedLoans', JSON.stringify(confirmedLoans));
+            confirmationModal.classList.add('hidden');
+            successMessage.textContent = 'Perpanjangan Peminjaman Berhasil Dikonfirmasi!';
+            successModal.classList.remove('hidden');
+        } else if (event.target.id === 'rejectButton') {
+            rejectedLoans.push(loans[selectedLoanIndex]);
+            loans.splice(selectedLoanIndex, 1);
+            updateLoanList();
+            localStorage.setItem('loans', JSON.stringify(loans));
+            localStorage.setItem('rejectedLoans', JSON.stringify(rejectedLoans));
+            rejectionModal.classList.add('hidden');
+            successMessage.textContent = 'Perpanjangan Peminjaman Berhasil Ditolak!';
+            successModal.classList.remove('hidden');
+        } else if (event.target.id === 'cancelButton' || event.target.id === 'cancelRejectButton') {
+            confirmationModal.classList.add('hidden');
+            rejectionModal.classList.add('hidden');
+        } else if (event.target.id === 'okButton') {
+            successModal.classList.add('hidden');
+        }
+    }
+    );
+
+    function updateLoanList() 
+    {
+        loanList.innerHTML = '';
+        loans.forEach((loan, index) => 
         {
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -140,42 +206,43 @@
                 <td class="py-2 px-4">${loan.duration}</td>
                 <td class="py-2 px-4">${loan.code}</td>
                 <td class="py-2 px-4">
-                    <button class="confirmButton bg-[#9DB2BF] text-white px-4 py-2 rounded">Konfirmasi</button>
-                    <button class="rejectButton bg-[#9DB2BF] text-white px-4 py-2 rounded">Tolak</button>
+                    <button class="confirmButton bg-[#9DB2BF] text-white px-4 py-2 rounded" data-index="${index}">Konfirmasi</button>
+                    <button class="rejectButton bg-[#9DB2BF] text-white px-4 py-2 rounded" data-index="${index}">Tolak</button>
                 </td>
             `;
             loanList.appendChild(row);
-        });
-
-        const confirmationModal = document.getElementById('confirmationModal');
-        const rejectionModal = document.getElementById('rejectionModal');
-        const successModal = document.getElementById('successModal');
-        const successMessage = document.getElementById('successMessage');
-
-        document.addEventListener('click', (event) => 
-        {
-            if (event.target.classList.contains('confirmButton')) {
-                confirmationModal.classList.remove('hidden');
-            } else if (event.target.classList.contains('rejectButton')) {
-                rejectionModal.classList.remove('hidden');
-            } else if (event.target.id === 'confirmButton') {
-                confirmationModal.classList.add('hidden');
-                successMessage.textContent = 'Perpanjangan Peminjaman Berhasil Dikonfirmasi!';
-                successModal.classList.remove('hidden');
-            } else if (event.target.id === 'rejectButton') {
-                rejectionModal.classList.add('hidden');
-                successMessage.textContent = 'Perpanjangan Peminjaman Berhasil Ditolak!';
-                successModal.classList.remove('hidden');
-            } else if (event.target.id === 'cancelButton' || event.target.id === 'cancelRejectButton') {
-                confirmationModal.classList.add('hidden');
-                rejectionModal.classList.add('hidden');
-            } else if (event.target.id === 'okButton') {
-                successModal.classList.add('hidden');
-            }
         }
         );
-    })
-    ;
-    
+    }
+
+    document.getElementById('generateCSV').addEventListener('click', () => 
+    {
+        let csvContent = "data:text/csv;charset=utf-8,";
+        csvContent += "NIM,Nama Anggota,Id Buku,Judul Buku,Durasi,Kode Peminjaman,Status\n";
+
+        confirmedLoans.forEach(loan => 
+        {
+            const row = `${loan.nim},${loan.name},${loan.bookId},${loan.title},${loan.duration},${loan.code},Dikonfirmasi`;
+            csvContent += row + "\n";
+        });
+
+        rejectedLoans.forEach(loan => 
+        {
+            const row = `${loan.nim},${loan.name},${loan.bookId},${loan.title},${loan.duration},${loan.code},Ditolak`;
+            csvContent += row + "\n";
+        });
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "DataPerpanjanganpeminjangan.csv");
+        document.body.appendChild(link);
+
+        link.click();
+    }
+    );
+});
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
