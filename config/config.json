@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "sibaca3",
+    "database": "sibaca1",
     "host": "localhost",
     "dialect": "mysql"
   },
