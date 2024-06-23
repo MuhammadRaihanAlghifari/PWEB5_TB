@@ -48,6 +48,10 @@ router.get("/ProfileMhs", function (req, res, next) {
   res.render("Mhs/ProfileMhs", { title: "Login" });
 });
 
+router.get("/EditProfileMhs", function (req, res, next) {
+  res.render("Mhs/EditProfileMhs", { title: "Login" });
+});
+
 router.get("/PinjamBuku", function (req, res, next) {
   res.render("Mhs/PinjamBuku", { title: "Login" });
 });

@@ -32,9 +32,10 @@ const checklogin = async (req, res) => {
       { id: foundUser.id,
         email: foundUser.email,
         nama: foundUser.nama,
-        nim: foundUser.nim,
+        id: foundUser.id,
         hp: foundUser.hp,
         departement: foundUser.departement,
+        alamat: foundUser.alamat,
         role: foundUser.role },
       process.env.JWT_SECRET_TOKEN,
       { expiresIn: 86400 }
@@ -42,10 +43,11 @@ const checklogin = async (req, res) => {
 
     const data = {
       email: foundUser.email,
+        id: foundUser.id,
         nama: foundUser.nama,
-        nim: foundUser.nim,
         hp: foundUser.hp,
         departement: foundUser.departement,
+        alamat: foundUser.alamat,
         role: foundUser.role}
       
     // Set cookie dengan token
@@ -101,7 +103,7 @@ const changePassword = async (req, res) => {
 
     // Perbarui password pengguna di database
     await user.update({ password: hashedNewPassword });
-    return res.redirect("/DashboardAdmin");
+    return res.redirect("/dashboardMhs");
     
   } catch (error) {
     console.log(error);
