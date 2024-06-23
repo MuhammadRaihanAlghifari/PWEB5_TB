@@ -17,7 +17,6 @@ router.post('/dashboardMhs',  controller.changePassword);
 router.get("/profileMhs", middleware.verifyToken, profileLihat.lihatProfil);
 router.get("/logout", controller.logout);
 
-
 // router.post('/dashboard', async (req, res) => {
 //   try {
 //     await changePassword(req, res);
@@ -28,7 +27,7 @@ router.get("/logout", controller.logout);
 // });
 
 router.get("/dashboard", function (req, res, next) {
-  res.render("layouts/dashboard", { title: "Login" });
+  res.render("layouts/DashboardAdmin", { title: "Login" });
 });
 
 router.get("/editprofile", function (req, res, next) {
@@ -69,8 +68,45 @@ router.get("/RiwayatPeminjaman", function (req, res, next) {
   res.render("Mhs/RiwayatPeminjaman", { title: "Login" });
 });
 
-router.get("/databuku", function (req, res, next) {
-  res.render("layouts/databuku", { title: "Login" });
+router.get("/KembalikanBuku", function (req, res, next) {
+  res.render("Mhs/KembalikanBuku", { title: "Login" });
 });
 
+router.get("/LihatBuku", function (req, res, next) {
+  res.render("Mhs/LihatBuku", { title: "Login" });
+});
+
+router.get("/RiwayatPeminjaman", function (req, res, next) {
+  res.render("Mhs/RiwayatPeminjaman", { title: "Login" });
+});
+
+
+
+router.get("/DataBuku", function (req, res, next) {
+  res.render("admin/DataBuku", { title: "Login" });
+});
+
+router.get("/TambahBuku", function (req, res, next) {
+  res.render("admin/TambahBuku", { title: "Login" });
+});
+
+router.get("/KategoriBuku", function (req, res, next) {
+  res.render("admin/KategoriBuku", { title: "Login" });
+});
+
+router.get("/ProfileAdmin", function (req, res, next) {
+  res.render("admin/ProfileAdmin", { title: "Login" });
+});
+
+router.get("/ListPeminjaman", function (req, res, next) {
+  res.render("admin/ListPeminjaman", { title: "Login" });
+});
+
+router.get("/ListPengembalian", function (req, res, next) {
+  res.render("admin/ListPengembalian", { title: "Login" });
+});
+
+router.get("/ListPerpanjangan", function (req, res, next) {
+  res.render("admin/ListPerpanjangan", { title: "Login" });
+});
 module.exports = router;
