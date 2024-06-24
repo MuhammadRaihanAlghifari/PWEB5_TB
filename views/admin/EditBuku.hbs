@@ -72,10 +72,11 @@
     </div>
 
     <main class="flex flex-col mb-20 ml-5 w-[72%] max-md:ml-0 max-md:w-full">
+      {{#each book as |b|}}
       <form method="post" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
         <section class="flex flex-col mt-10 max-md:mt-10 max-md:max-w-full">
           <h2 class="self-start px-4 pt-3.5 pb-4 text-4xl font-extrabold rounded-md text-slate-700 max-md:pr-5">
-            Tambah Buku
+            Edit Buku
           </h2>
           <article class="flex flex-col px-10 pt-5 pb-8 mt-7 rounded-3xl bg-slate-500 max-md:px-5 max-md:max-w-full">
           
@@ -85,39 +86,41 @@
           </div>
           
           <label for="kodebuku" class="self-start mt-6 ml-6 text-xl font-semibold text-white max-md:ml-2.5">Kode Buku</label>
-          <input type="text" name="Kode_Buku" id="kodebuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="Kode Buku" placeholder="Masukkan kode" />
+          <input disabled type="text" name="Kode_Buku" value="{{b.Kode_Buku}}" id="kodebuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="Kode Buku" placeholder="Masukkan kode" />
 
           <label for="judulBuku" class="self-start mt-6 ml-6 text-xl font-semibold text-white max-md:ml-2.5">Judul Buku</label>
-          <input type="text" name="Judul" id="judulBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="Judul Buku" placeholder="Masukkan judul" />
+          <input type="text" name="Judul" value="{{b.Judul}}" id="judulBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="Judul Buku" placeholder="Masukkan judul" />
 
           <label for="kategoriBuku" class="self-start mt-3 ml-6 text-xl font-semibold text-white max-md:ml-2.5">Kategori Buku</label>
           <select id="kategoriBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="Kategori Buku" name="ID_Kategori">
-            {{#each categories}}
-            <option value="{{this.ID_Kategori}}">{{this.Nama_Kategori}}</option>
+            {{#each ../categories as |category|}}
+            <option value="{{category.ID_Kategori }}">{{category.Nama_Kategori}}</option>
             {{/each}}
-              {{!-- <option value="" disabled selected>Kategori</option>
-              <option value="1">Fiksi</option>
-              <option value="2">Non-Fiksi</option>
-              <option value="3">Sci-Fi</option> --}}
+            {{!-- <option value="" disabled {{#unless this.ID_Kategori}}selected{{/unless}}>Kategori</option>
+            {{/each}}
+            {{!-- <option value="" disabled {{#unless this.ID_Kategori}}selected{{/unless}}>Kategori</option>
+            <option value="1" {{#if (eq this.ID_Kategori 1)}}selected{{/if}}>Fiksi</option>
+            <option value="2" {{#if (eq this.ID_Kategori 2)}}selected{{/if}}>Non-Fiksi</option>
+            <option value="3" {{#if (eq this.ID_Kategori 3)}}selected{{/if}}>Sci-Fi</option> --}}
           </select>
 
           <label for="penerbit" class="self-start mt-3.5 ml-6 text-xl font-semibold text-white max-md:ml-2.5">penerbit</label>
-          <input type="text" name="Penulis" id="penerbit" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="penerbit" placeholder=" Masukkan Nama Penerbit" />
+          <input type="text" name="Penulis" value="{{b.Penulis}}" id="penerbit" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="penerbit" placeholder=" Masukkan Nama Penerbit" />
 
           <label for="pengarang" class="self-start mt-3.5 ml-6 text-xl font-semibold text-white max-md:ml-2.5">pengarang</label>
-          <input type="text" name="Pengarang" id="pengarang" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="pengarang" placeholder=" Masukkan Nama Pengarang" />
+          <input type="text" name="Pengarang" value="{{b.Pengarang}}" id="pengarang" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="pengarang" placeholder=" Masukkan Nama Pengarang" />
 
           <label for="tahunTerbit" class="self-start mt-3.5 ml-6 text-xl font-semibold text-white max-md:ml-2.5">Tahun Terbit</label>
-          <input type="text" name="Tahun_Terbit" id="tahunTerbit" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="tahunTerbit" placeholder=" Masukkan Tahun Terbit" />
+          <input type="text" name="Tahun_Terbit" value="{{b.Tahun_Terbit}}" id="tahunTerbit" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="tahunTerbit" placeholder=" Masukkan Tahun Terbit" />
 
           <label for="jumlahBuku" class="self-start mt-3.5 ml-6 text-xl font-semibold text-white max-md:ml-2.5">Jumlah Buku</label>
-          <input type="text" name="Stok" id="jumlahBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="jumlahBuku" placeholder=" Masukkan Jumlah Buku" />
+          <input type="text" name="Stok" value="{{b.Stok}}" id="jumlahBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-100 h-[50px] w-full pl-5" aria-label="jumlahBuku" placeholder=" Masukkan Jumlah Buku" />
 
           <button type="submit" class="flex gap-2.5 self-center px-4 py-3 mt-7 text-2xl font-medium text-center text-white whitespace-nowrap rounded-3xl bg-[#27374D] max-md:px-5 hover:bg-slate-600" tabindex="0">
               <span>Simpan</span></button>
         </section>
       </form>
-      
+      {{/each}}
     </main>
   </nav>
 </header>
@@ -130,12 +133,13 @@
     const formData = new FormData(form);
 
     try {
-      const response = await axios.post(`http://localhost:5000/addBook`, formData, {
+      let bookCode = document.getElementById('kodebuku').value;
+      const response = await axios.post(`http://localhost:5000/updateBook/${bookCode}`, formData, {
           headers: {
               "Content-Type": "multipart/form-data"
           }
       });
-      alert('Buku berhasil ditambahkan');
+      alert('Buku berhasil diubah');
       window.location.href = '/DataBuku';
       // Handle success (e.g., display a success message, redirect, etc.)
     } catch (error) {

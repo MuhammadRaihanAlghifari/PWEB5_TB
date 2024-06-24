@@ -54,7 +54,6 @@ const checklogin = async (req, res) => {
     res.cookie("token", token, { httpOnly: true });
 
 
-
     // Redirect ke halaman sesuai dengan peran pengguna
     if (foundUser.role === "mahasiswa") {
       // return res.render("layouts/showProfile", { data })
