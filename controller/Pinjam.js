@@ -54,7 +54,7 @@ exports.borrowBook = async (req, res) => {
     );
 
     await transaction.commit();
-    res.status(200).json({ message: "Book borrowed successfully" });
+    res.status(200).json({ message: "Buku Berhasil Dipinjam dengan Kode peminjaman : " + peminjamanId + " (catat kode untuk melakukan Pengembalian)" });
   } catch (error) {
     await transaction.rollback();
     res.status(500).json({ message: "An error occurred", error: error.message });
