@@ -65,10 +65,10 @@
 <!-- End Sidebar -->
 
 <!-- Content-->
-<section class="flex items-start justify-center rounded-2xl ml-70 mx-auto pt-10">
+<section class="flex items-start justify-end rounded-2xl ml-70 mx-auto pt-10">
     <div class="container">
         <main class="flex-1">
-            <h2 class="text-3xl font-bold text-slate-700 mt-4">LIST PEMINJAMAN</h2>
+            <h2 class="text-3xl font-bold text-slate-700 mt-4">LIST PERPANJANGAN PEMINJAMAN</h2>
             <button id="generateCSV" class="bg-slate-700 text-white px-6 py-1 rounded mt-4">Cetak</button>
             <table class="w-full bg-white shadow-md rounded mt-4">
                 <thead class="bg-[#9DB2BF]">
@@ -95,7 +95,7 @@
 <!-- Confirmation Modal -->
 <div id="confirmationModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-[#9DB2BF] p-10 rounded shadow-lg text-center">
-        <p class="text-slate-800">Apakah Anda yakin untuk mengonfirmasi peminjaman?</p>
+        <p class="text-slate-800">Apakah Anda yakin untuk mengonfirmasi perpanjangan peminjaman?</p>
         <button id="confirmButton" class="bg-slate-700 text-white px-4 py-2 rounded mt-4">Konfirmasi</button>
         <button id="cancelButton" class="bg-slate-700 text-white px-4 py-2 rounded mt-4">Batal</button>
     </div>
@@ -104,7 +104,7 @@
 <!-- Rejection Modal -->
 <div id="rejectionModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
     <div class="bg-[#9DB2BF] p-10 rounded shadow-lg text-center">
-        <p class="text-slate-800">Apakah Anda yakin untuk menolak peminjaman?</p>
+        <p class="text-slate-800">Apakah Anda yakin untuk menolak perpanjangan peminjaman?</p>
         <button id="rejectButton" class="bg-slate-700 text-white px-4 py-2 rounded mt-4">Tolak</button>
         <button id="cancelRejectButton" class="bg-slate-700 text-white px-4 py-2 rounded mt-4">Batal</button>
     </div>
@@ -125,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () =>
     // Load data from localStorage
     const loans = JSON.parse(localStorage.getItem('loans')) || [
         {nim: '2211522031', name: 'Agif', bookId: 'PB0001', title: 'Matematika Diskrit', duration: '6 Hari', code: 'BS001'},
-        {nim: '2211512000', name:'Yaya', bookId: 'PB0004', title: 'Kalkulus', duration: '3 Hari', code: 'BS004'}
         
     ];
 
@@ -173,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () =>
             localStorage.setItem('loans', JSON.stringify(loans));
             localStorage.setItem('confirmedLoans', JSON.stringify(confirmedLoans));
             confirmationModal.classList.add('hidden');
-            successMessage.textContent = 'Peminjaman Berhasil Dikonfirmasi!';
+            successMessage.textContent = 'Perpanjangan Peminjaman Berhasil Dikonfirmasi!';
             successModal.classList.remove('hidden');
         } else if (event.target.id === 'rejectButton') {
             rejectedLoans.push(loans[selectedLoanIndex]);
@@ -182,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () =>
             localStorage.setItem('loans', JSON.stringify(loans));
             localStorage.setItem('rejectedLoans', JSON.stringify(rejectedLoans));
             rejectionModal.classList.add('hidden');
-            successMessage.textContent = 'Peminjaman Berhasil Ditolak!';
+            successMessage.textContent = 'Perpanjangan Peminjaman Berhasil Ditolak!';
             successModal.classList.remove('hidden');
         } else if (event.target.id === 'cancelButton' || event.target.id === 'cancelRejectButton') {
             confirmationModal.classList.add('hidden');
@@ -236,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () =>
         const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
         link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "DataPeminjaman.csv");
+        link.setAttribute("download", "DataPerpanjanganpeminjangan.csv");
         document.body.appendChild(link);
 
         link.click();
@@ -246,3 +245,4 @@ document.addEventListener('DOMContentLoaded', () =>
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+

@@ -39,35 +39,18 @@
         <h2 class="self-start px-4 pt-3.5 pb-8 text-4xl font-extrabold rounded-md shadow-sm bg-slate-400 bg-opacity-20 text-slate-700 max-md:pr-5">
           Pinjam Buku
         </h2>
-        <article class="flex flex-col px-10 pt-5 pb-8 mt-7 rounded-3xl bg-slate-500 max-md:px-5 max-md:max-w-full">
-          <h3 class="text-3xl font-semibold text-black max-md:max-w-full">Buku 1</h3>
-          <label for="judulBuku" class="self-start mt-6 ml-6 text-xl font-semibold text-white max-md:ml-2.5">Judul Buku</label>
-          <input type="text" id="judulBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-300 h-[50px] w-full" aria-label="Judul Buku" placeholder=" Masukkan judul" />
-          <label for="kategoriBuku" class="self-start mt-3 ml-6 text-xl font-semibold text-white max-md:ml-2.5">Kategori Buku</label>
-          <select id="kategoriBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-300 h-[50px] w-full" aria-label="Kategori Buku">
-            <option value="">Kategori</option>
-            <option value="">Select Category</option>
-            <option value="">Select Category2</option>
+        <form method="POST" action="/pinjam" class="flex flex-col px-10 pt-5 pb-8 mt-7 rounded-3xl bg-slate-500 max-md:px-5 max-md:max-w-full">
+          <label for="judulBuku" class="self-start mt-6 ml-6 text-xl font-semibold text-white max-md:ml-2.5">email</label>
+          <input type="text" id="judulBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-300 h-[50px] w-full" name="email" placeholder=" Masukkan email" />
+         <label for="judulBuku" class="self-start mt-6 ml-6 text-xl font-semibold text-white max-md:ml-2.5">ID Admin</label>
+          <input type="text" id="judulBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-300 h-[50px] w-full" name="Id_Admin" placeholder=" Masukkan ID Admin" />
+          <label for="namaPenulis" class="self-start mt-3.5 ml-6 text-xl font-semibold text-white max-md:ml-2.5">kodeBuku</label>
+          <input type="text" id="namaPenulis" class="shrink-0 mt-2 rounded-3xl bg-zinc-300 h-[50px] w-full" name="kode_Buku" placeholder=" Masukkan Kode Buku"/>
+          <label for="judulBuku" class="self-start mt-6 ml-6 text-xl font-semibold text-white max-md:ml-2.5">Durasi peminjaman (dalam hari)</label>
+          <input type="text" id="judulBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-300 h-[50px] w-full" name="durasiPeminjaman" placeholder=" Masukkan durasi peminjaman" />
           </select>
-          <label for="namaPenulis" class="self-start mt-3.5 ml-6 text-xl font-semibold text-white max-md:ml-2.5">Nama Penulis</label>
-          <input type="text" id="namaPenulis" class="shrink-0 mt-2 rounded-3xl bg-zinc-300 h-[50px] w-full" aria-label="Nama Penulis" placeholder=" Masukkan Nama Peulis" />
-          <label for="durasiPeminjaman" class="self-start mt-3.5 ml-6 text-xl font-semibold text-white max-md:ml-2.5">Durasi Peminjaman</label>
-          <select id="durasiPeminjaman" class="shrink-0 mt-2 rounded-3xl bg-zinc-300 h-[50px] w-full" aria-label="Kategori Buku">
-            <option value="">Durasi</option>
-            <option value="">1 Hari</option>
-            <option value="">2 Hari</option>
-          </select>
-          <button class="flex gap-2.5 self-center px-5 py-3.5 mt-7 text-2xl font-medium text-center text-white whitespace-nowrap rounded-3xl bg-slate-400 max-md:px-5 hover:bg-slate-600" tabindex="0">
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/3497da4f52654fe75b292041ac48b209e4f48c3998ae671e195373c729d076ca?apiKey=863c3774457247cf9941fba7937e9907&"
-              class="shrink-0 self-start aspect-[1.14] w-[26px]"
-              alt="Tambah Icon"
-            />
-            <span class="flex-auto">Tambah</span>
-          </button>
           <button class="justify-center self-end px-14 py-3 mt-4 max-w-full text-lg font-medium text-center text-white rounded-2xl bg-slate-700 w-[230px] max-md:px-5 hover:bg-slate-900" tabindex="0">Ajukan Peminjaman</button>
-        </article>
+        </form>
       </section>
     </main>
   </nav>

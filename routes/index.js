@@ -6,8 +6,6 @@ const profileLihat = require('../controller/lihatProfile')
 const crudController = require('../controller/crudcontroller')
 
 
-
-
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("layouts/login1", { title: "Login" });
@@ -15,9 +13,13 @@ router.get("/", function (req, res, next) {
 
 
 router.get('/login1', controller.form);
-router.post('/showProfile', controller.checklogin, controller.changePassword);
+router.post('/profileMhs', controller.checklogin, controller.changePassword);
 router.post('/dashboardMhs',  controller.changePassword);
-router.get("/showProfile", middleware.verifyToken, profileLihat.lihatProfil);
+router.post('/pinjam', borrowController.borrowBook);
+router.post('/kembalikanbuku', returnBookController.returnBook);
+router.post('/PerpanjangPeminjaman', extendLoanController.extendLoan);
+router.get("/profileMhs", middleware.verifyToken, profileLihat.lihatProfil);
+router.post('/RiwayatPinjam', riwayatPeminjaman.getRiwayatPeminjaman);
 router.get("/logout", controller.logout);
 
 // router.post('/dashboard', async (req, res) => {
@@ -30,7 +32,7 @@ router.get("/logout", controller.logout);
 // });
 
 router.get("/dashboard", function (req, res, next) {
-  res.render("layouts/dashboard", { title: "Login" });
+  res.render("layouts/DashboardAdmin", { title: "Login" });
 });
 
 router.get("/editprofile", function (req, res, next) {
@@ -51,6 +53,10 @@ router.get("/ProfileMhs", function (req, res, next) {
   res.render("Mhs/ProfileMhs", { title: "Login" });
 });
 
+router.get("/EditProfileMhs", function (req, res, next) {
+  res.render("Mhs/EditProfileMhs", { title: "Login" });
+});
+
 router.get("/PinjamBuku", function (req, res, next) {
   res.render("Mhs/PinjamBuku", { title: "Login" });
 });
@@ -67,10 +73,6 @@ router.get("/RiwayatPeminjaman", function (req, res, next) {
   res.render("Mhs/RiwayatPeminjaman", { title: "Login" });
 });
 
-
-router.get("/DashboardAdmin", function (req, res, next) {
-  res.render("admin/DashBoardAdmin", { title: "Login" });
-});
 
 router.get("/DataBuku", async function (req, res, next) {
   const books = await crudController.fetchBooks();
