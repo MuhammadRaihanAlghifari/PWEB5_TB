@@ -3,6 +3,9 @@ var router = express.Router();
 const middleware = require("../middleware/verifytoken")
 const controller = require('../controller/auth.controller')
 const profileLihat = require('../controller/lihatProfile')
+const crudController = require('../controller/crudcontroller')
+
+
 
 
 /* GET home page. */
@@ -64,33 +67,41 @@ router.get("/RiwayatPeminjaman", function (req, res, next) {
   res.render("Mhs/RiwayatPeminjaman", { title: "Login" });
 });
 
-router.get("/KembalikanBuku", function (req, res, next) {
-  res.render("Mhs/KembalikanBuku", { title: "Login" });
-});
-
-router.get("/LihatBuku", function (req, res, next) {
-  res.render("Mhs/LihatBuku", { title: "Login" });
-});
-
-router.get("/RiwayatPeminjaman", function (req, res, next) {
-  res.render("Mhs/RiwayatPeminjaman", { title: "Login" });
-});
-
 
 router.get("/DashboardAdmin", function (req, res, next) {
   res.render("admin/DashBoardAdmin", { title: "Login" });
 });
 
-router.get("/DataBuku", function (req, res, next) {
-  res.render("admin/DataBuku", { title: "Login" });
+router.get("/DataBuku", async function (req, res, next) {
+  const books = await crudController.fetchBooks();
+  res.render("admin/DataBuku", { title: "Login", books: books });
 });
 
-router.get("/TambahBuku", function (req, res, next) {
-  res.render("admin/TambahBuku", { title: "Login" });
+router.post("/addBook", crudController.addBook);
+
+router.get("/TambahBuku", async function (req, res, next) {
+  const categories = await crudController.fetchCategories();
+  res.render("admin/TambahBuku", { title: "Login", categories });
 });
 
-router.get("/KategoriBuku", function (req, res, next) {
-  res.render("admin/KategoriBuku", { title: "Login" });
+router.get("/EditBuku/:kode", async function (req, res, next) {
+  const categories = await crudController.fetchCategories();
+  const book = await crudController.fetchBook(req.params.kode);
+  res.render("admin/EditBuku", { title: "Login", book, categories });
+});
+
+router.get("/KategoriBuku", async function (req, res, next) {
+  const categories = await crudController.fetchCategories();
+  res.render("admin/KategoriBuku", { title: "Login", categories });
+});
+
+router.get("/TambahKategori", function (req, res, next) {
+  res.render("admin/TambahKategori", { title: "Login" });
+});
+
+router.get("/EditKategori/:id", async function (req, res, next) {
+  const category = await crudController.fetchCategory(req.params.id);
+  res.render("admin/EditKategori", { title: "Login", category });
 });
 
 router.get("/ProfileAdmin", function (req, res, next) {
@@ -99,5 +110,13 @@ router.get("/ProfileAdmin", function (req, res, next) {
 
 router.get("/ListPeminjaman", function (req, res, next) {
   res.render("admin/ListPeminjaman", { title: "Login" });
+});
+
+router.get("/ListPengembalian", function (req, res, next) {
+  res.render("admin/ListPengembalian", { title: "Login" });
+});
+
+router.get("/ListPerpanjangan", function (req, res, next) {
+  res.render("admin/ListPerpanjangan", { title: "Login" });
 });
 module.exports = router;
