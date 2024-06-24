@@ -40,25 +40,17 @@
           Kembalikan buku
         </header>
         <div class="flex flex-col px-7 pt-12 pb-8 mt-5 text-black rounded-xl bg-slate-500 max-md:pl-5 max-md:max-w-full">
-          <form class="flex flex-col">
-            <table class="w-full bg-white shadow-md rounded">
-                <thead class="bg-[#9DB2BF]">
-                    <tr>
-                        <th class="py-2 px-4">Kode Peminjaman</th>
-                        <th class="py-2 px-4">Kode Buku</th>
-                        <th class="py-2 px-4">Judul Buku</th>
-                        <th class="py-2 px-4">Tanggal Peminjaman</th>
-                        <th class="py-2 px-4">Durasi (hari)</th>
-                        <th class="py-2 px-4">Tanggal Jatuh Tempo</th>
-                        <th class="py-2 px-4">Aksi</th>
-                    </tr>
-                </thead>
-                
-                <tbody id="loan-list">
-
-                </tbody>
-            </table>
-          </form>
+          <form method="POST" action="/kembalikanBuku" class="flex flex-col px-10 pt-5 pb-8 mt-7 rounded-3xl bg-slate-500 max-md:px-5 max-md:max-w-full">
+            <h3 class="self-center text-4xl font-extrabold text-black max-md:max-w-full">Buku 1</h3>
+            <label for="judulBuku" class="self-start mt-6 ml-6 text-xl font-semibold text-white max-md:ml-2.5">email</label>
+            <input type="text" id="judulBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-300 h-[50px] w-full" name="email" placeholder=" Masukkan email" />
+            <label for="judulBuku" class="self-start mt-6 ml-6 text-xl font-semibold text-white max-md:ml-2.5">kode_Buku</label>
+            <input type="text" id="judulBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-300 h-[50px] w-full" name="kode_Buku" placeholder=" Masukkan Kode buku yang ingin dikembalikan" />
+          <div class="flex gap-5 justify-between self-end mt-10 max-md:flex-wrap">
+          <div class="justify-center px-7 py-3 text-lg font-medium text-center text-white rounded-3xl bg-slate-700 max-md:px-5"><a href="perpanjangan">Perpanjangan</a></div>
+          <button class="justify-center px-14 py-2.5 text-lg font-medium text-center text-white rounded-3xl bg-slate-700 max-md:px-5">kembalikan</button>
+        </div>
+        </form>
         </div>
       </section>
     </main>
