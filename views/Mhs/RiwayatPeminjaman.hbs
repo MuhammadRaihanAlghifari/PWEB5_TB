@@ -40,9 +40,11 @@
           Riwayat Peminjaman
         </header>
         <article class="flex flex-col px-7 pt-12 pb-8 mt-7 text-black rounded-xl bg-slate-500 max-md:pl-5 max-md:max-w-full">
-          <section class="flex flex-col pt-1.5 pb-20 bg-slate-200 max-md:max-w-full">
-            <form class="flex flex-col">
-            <table class="w-full bg-white shadow-md rounded">
+            <form method="POST" action="/RiwayatPinjam" class="flex flex-col px-10 pt-5 pb-8 mt-7 rounded-3xl bg-slate-500 max-md:px-5 max-md:max-w-full">
+              <label for="judulBuku" class="self-start mt-6 ml-6 text-xl font-semibold text-white max-md:ml-2.5">email</label>
+              <input type="text" id="judulBuku" class="shrink-0 mt-2 rounded-3xl bg-zinc-300 h-[50px] w-full" name="email" placeholder=" Masukkan email" />
+              <button class="justify-center self-end px-14 py-3 mt-4 max-w-full text-lg font-medium text-center text-white rounded-2xl bg-slate-700 w-[230px] max-md:px-5 hover:bg-slate-900" tabindex="0">Cek Riwayat</button>
+              <table class="w-full bg-white shadow-md rounded mt-5">
                 <thead class="bg-[#9DB2BF]">
                     <tr>
                         <th class="py-2 px-4">Kode Peminjaman</th>
@@ -51,17 +53,27 @@
                         <th class="py-2 px-4">Tanggal Peminjaman</th>
                         <th class="py-2 px-4">Durasi (hari)</th>
                         <th class="py-2 px-4">Tanggal Jatuh Tempo</th>
-                        <th class="py-2 px-4">Aksi</th>
+                        <th class="py-2 px-4">Denda</th>
                     </tr>
                 </thead>
-                
                 <tbody id="loan-list">
-
+                  {{#each peminjamanRecords}}
+                    {{#each Detail_Peminjaman}}
+                    <tr>
+                      <td class="py-2 px-4">{{this.Id_Peminjaman}}</td>
+                      <td class="py-2 px-4">{{this.Kode_Buku}}</td>
+                      <td class="py-2 px-4">{{this.Buku.Judul_Buku}}</td>
+                      <td class="py-2 px-4">{{this.Tanggal_Peminjaman}}</td>
+                      <td class="py-2 px-4">{{this.Durasi_Peminjaman}}</td>
+                      <td class="py-2 px-4">{{this.Tanggal_Jatuh_Tempo}}</td>
+                      <td class="py-2 px-4">{{this.Denda}}</td>
+                    </tr>
+                    {{/each}}
+                  {{/each}}
                 </tbody>
-            </table>
-          </form>
+              </table>
+            </form>
         </article>
-      </section>
     </main>
   </div>
 </div>

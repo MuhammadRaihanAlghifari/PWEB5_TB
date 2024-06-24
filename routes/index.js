@@ -5,6 +5,8 @@ const controller = require('../controller/auth.controller')
 const profileLihat = require('../controller/lihatProfile')
 const borrowController = require('../controller/Pinjam')
 const returnBookController = require('../controller/kembalikan');
+const extendLoanController = require('../controller/PerpanjangPeminjaman');
+const riwayatPeminjaman = require('../controller/RiwayatPeminjaman');
 
 
 /* GET home page. */
@@ -18,7 +20,9 @@ router.post('/profileMhs', controller.checklogin, controller.changePassword);
 router.post('/dashboardMhs',  controller.changePassword);
 router.post('/pinjam', borrowController.borrowBook);
 router.post('/kembalikanbuku', returnBookController.returnBook);
+router.post('/PerpanjangPeminjaman', extendLoanController.extendLoan);
 router.get("/profileMhs", middleware.verifyToken, profileLihat.lihatProfil);
+router.post('/RiwayatPinjam', riwayatPeminjaman.getRiwayatPeminjaman);
 router.get("/logout", controller.logout);
 
 // router.post('/dashboard', async (req, res) => {
@@ -78,6 +82,10 @@ router.get("/KembalikanBuku", function (req, res, next) {
 
 router.get("/LihatBuku", function (req, res, next) {
   res.render("Mhs/LihatBuku", { title: "Login" });
+});
+
+router.get("/PerpanjangPeminjaman", function (req, res, next) {
+  res.render("Mhs/PerpanjangPeminjaman", { title: "Login" });
 });
 
 router.get("/RiwayatPeminjaman", function (req, res, next) {

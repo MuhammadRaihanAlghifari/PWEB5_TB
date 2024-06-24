@@ -26,7 +26,7 @@ const lihatProfil = async(req,res)=>{
       return res.render('Mhs/ProfileMhs', { akun })
     } catch (error) {
       console.error(error);
-      return res.status(500).json({success: false,messsage:"asd", error})
+      return res.status(500).json({success: false,messsage:"try againos", error})
     }
   }
   

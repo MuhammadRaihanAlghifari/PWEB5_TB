@@ -5,7 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     id_peminjaman: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
+      references: {
+        model: "Peminjaman",
+        key: "Id_Peminjaman",
+      },
     },
     email: DataTypes.STRING,
     Id_Admin: DataTypes.INTEGER,

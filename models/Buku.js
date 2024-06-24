@@ -1,22 +1,3 @@
-// models/KategoriBuku.js
-module.exports = (sequelize, DataTypes) => {
-  const KategoriBuku = sequelize.define(
-    "KategoriBuku",
-    {
-      Id_Kategori: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      Nama_Kategori: DataTypes.STRING,
-    },
-    {
-      timestamps: false,
-    }
-  );
-  return KategoriBuku;
-};
-
 // models/Buku.js
 module.exports = (sequelize, DataTypes) => {
   const Buku = sequelize.define(
@@ -44,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,
     }
   );
+  Buku.associate = (models) => {
+    Buku.hasMany(models.Detail_Peminjaman, {
+      foreignKey: 'Kode_Buku',
+      sourceKey: 'Kode_Buku',
+    });
+  };
   return Buku;
 };
 
