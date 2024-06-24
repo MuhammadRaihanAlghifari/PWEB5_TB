@@ -4,6 +4,7 @@ const middleware = require("../middleware/verifytoken")
 const controller = require('../controller/auth.controller')
 const profileLihat = require('../controller/lihatProfile')
 const borrowController = require('../controller/Pinjam')
+const returnBookController = require('../controller/kembalikan');
 
 
 /* GET home page. */
@@ -15,7 +16,8 @@ router.get("/", function (req, res, next) {
 router.get('/login1', controller.form);
 router.post('/profileMhs', controller.checklogin, controller.changePassword);
 router.post('/dashboardMhs',  controller.changePassword);
-router.post('/borrow', borrowController.borrowBook);
+router.post('/pinjam', borrowController.borrowBook);
+router.post('/kembalikanbuku', returnBookController.returnBook);
 router.get("/profileMhs", middleware.verifyToken, profileLihat.lihatProfil);
 router.get("/logout", controller.logout);
 
