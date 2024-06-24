@@ -1,3 +1,4 @@
+<!-- Sidebar -->
 <div class="pr-12 bg-slate-200 max-md:pr-5">
   <div class="flex gap-5 max-md:flex-col max-md:gap-0">
     <div class="flex flex-col w-1/4 max-md:w-full">
@@ -17,7 +18,7 @@
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/10ca86c0fa9f5c4743f2eac8520827b728b57241d504744cbd15b00d130920c4?"
             class="shrink-0 aspect-[0.86] w-[25px]"
           />
-          <div class="flex-auto my-auto"><a href="ListPeminjaman">Data Peminjaman</a></div>
+          <div class="flex-auto my-auto"><a href="ListPeminjaman">List Peminjaman</a></div>
         </div>
         <div class="flex gap-5 mt-8">
           <img
@@ -25,7 +26,23 @@
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/7089de8e39479018adcd656b47318a42920e119966f6c5dd3b5cc790b623c66e?"
             class="shrink-0 aspect-[0.86] w-[25px]"
           />
-          <div class="flex-auto"><a href="DataPengembalian">Data Pengembalian</a></div>
+          <div class="flex-auto"><a href="ListPengembalian">List Pengembalian</a></div>
+        </div>
+         <div class="flex gap-5 mt-8">
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/87b551cf3aa5a343fcfd98828ff6a3e81da468dc042b833246ce10edcd57e44f?"
+            class="shrink-0 aspect-[0.86] w-[25px]"
+          />
+          <div class="flex-auto"><a href="ListPerpanjangan">List Perpanjangan</a></div>
+        </div>
+        <div class="flex gap-5 mt-8">
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/e365d1cf19fd1044d2daa4f94170b7f2820a62d9c007c82d8d8a3d92dc531247?"
+            class="shrink-0 aspect-[0.86] w-[25px]"
+          />
+          <div class="flex-auto"><a href="KategoriBuku">Kategori Buku</a></div>
         </div>
         <div class="flex gap-5 mt-8">
           <img
@@ -39,7 +56,7 @@
           <img
             loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/c48306110fc090c44783725041e9a4a01f51f1f38c250b2ad64a43c1789ebd38?"
-            class="shrink-0 aspect-square w-[29px]"
+            class="shrink-0 aspect-[0.86] w-[25px]"
           />
           <div class="flex-auto my-auto"><a href="ProfileAdmin">Profile</a></div>
         </div>
@@ -47,12 +64,13 @@
           <img
             loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/3a33e1545f0e1600b4a06c1ea80cb88c0790aa555d25c184928c8945a1779dba?"
-            class="shrink-0 aspect-[1.14] w-[33px]"
+            class="shrink-0 aspect-[0.86] w-[25px]"
           />
           <div class="flex-auto my-auto"><a href="/logout">Log Out</a></div>
         </div>
       </div>
     </div>
+    
     <!-- Main Content -->
     <div class="flex flex-col w-3/4 max-md:w-full">
       <!-- Header -->
@@ -83,7 +101,6 @@
             </div>
             <div class="mb-3">
                 <button type="button" class="text-white bg-[#27374D] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><a href="TambahBuku">Tambah</a></button>
-                <button type="button" class="text-white bg-[#27374D] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><a href="KategoriBuku">Kategori</a></button>
             </div>
         
         </div>
@@ -100,24 +117,26 @@
             </tr>
           </thead>
           <tbody>
+            {{#each books}}
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="px-6 py-4">B001</td>
+                <td class="px-6 py-4">{{this.Kode_Buku}}</td>
                 <td class="px-6 py-4">
-                    <img src="images/coverjava.jpg" alt="Cover Buku" class="h-20 w-20 object-cover rounded-lg">
+                    <img src="http://localhost:5000/images/{{this.path}}" alt="Cover Buku" class="h-20 w-20 object-cover rounded-lg">
                 </td>
                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Dasar Pemograman
+                    {{this.Judul}}
                 </td>
-                <td class="px-6 py-4">Erlangga</td>
-                <td class="px-6 py-4">Budi</td>
-                <td class="px-6 py-4">5</td>
+                <td class="px-6 py-4">{{this.Penulis}}</td>
+                <td class="px-6 py-4">{{this.Pengarang}}</td>
+                <td class="px-6 py-4">{{this.Stok}}</td>
                 <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ml-3">Remove</a>
+                    <a href="EditBuku/{{this.Kode_Buku}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <a href="http://localhost:5000/deleteBook/{{this.Kode_Buku}}" class="font-medium text-red-600 dark:text-red-500 hover:underline ml-3">Remove</a>
                 </td>
             </tr>
+            {{/each}}
 
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            {{!-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
               <td class="px-6 py-4">B002</td>
                <th scope="col" class="px-16 py-3">
                     <span class="sr-only">Image</span>
@@ -183,7 +202,7 @@
                 <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                 <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ml-3">Remove</a>
               </td>
-            </tr>
+            </tr> --}}
           </tbody>
         </table>
 
@@ -207,9 +226,6 @@
             </li>
             <li>
               <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
             </li>
             <li>
               <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
